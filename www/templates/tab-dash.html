@@ -1,0 +1,38 @@
+<ion-view view-title="Automated Room">
+
+    <ion-content class="padding">
+        <div class="content-bg">
+            <div class="row">
+                <img src="img/cool_lamp.png" width="180" height="180" class="center"/>
+            </div>
+            <br><br>
+            <div class="row">
+
+                <div class="center">
+                    <span class="releStatus" ng-if="cantConnect == false">
+                        <span class="releStatus" ng-if="resetESP == true">
+                            Tentando se Comunicar <ion-spinner class="spinner spinner-android" icon="android"></ion-spinner>
+                        </span>
+                        <span class="releStatus" ng-if="resetESP == false">
+                            Status do Relé: <br>
+                            <span class="center success">{{releStatus}}</span>
+                        </span>
+                    </span>
+
+                    <span class="releStatus" ng-if="cantConnect == true">
+                        <i class="ion-close-circled error"></i> Falha de Conexão, verifique o módulo. 
+                    </span>
+                </div>
+            </div>
+            <br><br>
+            <div class="row" ng-if="canChangeStatus == true">
+                <div class="center">
+                    <button class="button button-positive" type="button" ng-click="changeStatus()">
+                        <i class="ion-flash"></i> Alternar Estado
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
