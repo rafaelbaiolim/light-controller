@@ -108,3 +108,12 @@ body{
 ion-tabs.tabs-color-active-positive .tab-item {
     color: #d2d2d1;
 }
+
+.bar.bar-stable {
+    background-color: #272822 !important;
+}
+
+@media screen and (max-height: 800px) and (min-height: 320px)
+.bar.bar-stable .title {
+    color: #fff;
+}
