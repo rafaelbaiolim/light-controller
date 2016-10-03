@@ -36,7 +36,7 @@ angular.module('starter.controllers', [])
 
             $scope.selectTimer = function (val) {
                 $scope.timeForTimer = val;
-                $scope.timer = val
+                $scope.timer = val;
                 $scope.started = false;
                 $scope.paused = false;
                 $scope.done = false;
@@ -61,6 +61,12 @@ angular.module('starter.controllers', [])
                 $timeout.cancel(mytimeout);
                 $scope.runingTimer = "TIMER";
             };
+
+            $scope.$watch("runingTimer", function () {
+                if ($scope.timer == 0) {
+                    $scope.runingTimer = "TIMER";
+                }
+            });
 
             // triggered, when the timer stops, you can do something here, maybe show a visual indicator or vibrate the device
             $scope.$on('timer-stopped', function (event, remaining) {
@@ -89,12 +95,7 @@ angular.module('starter.controllers', [])
                     if (duration.second() > 0) {
                         format += "s[s] ";
                     }
-                    if(duration.hour() == 59
-                       && duration.minute() == 59
-                       && duration.second() == 59){
-                       $scope.runingTimer = "TIMER";
-                    }
-                   
+
                     return duration.format(format);
                 }
             };
@@ -116,7 +117,7 @@ angular.module('starter.controllers', [])
                             selectedTime.setMonth(d.getMonth());
                             selectedTime.setDate(d.getDate());
 
-                            selectedTime.setHours(selectedTime.getUTCHours());
+                            selectedTime.setHours(selectedTime.getUTCHours() - 1);
                             selectedTime.setMinutes(selectedTime.getUTCMinutes());
                             selectedTime.setSeconds(selectedTime.getUTCSeconds());
 
