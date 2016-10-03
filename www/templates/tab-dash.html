@@ -1,13 +1,16 @@
 <ion-view view-title="Automated Room">
 
-    <ion-content class="padding">
+    <ion-content class="padding" on-swipe-left="swipeLeft()">
+        <ion-refresher
+            pulling-text="Refresh"
+            on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="content-bg">
             <div class="row">
                 <img src="img/cool_lamp.png" width="180" height="180" class="center"/>
             </div>
             <br><br>
             <div class="row">
-
                 <div class="center">
                     <span class="releStatus" ng-if="cantConnect == false">
                         <span class="releStatus" ng-if="resetESP == true">

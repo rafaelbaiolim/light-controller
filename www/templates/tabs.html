@@ -5,10 +5,15 @@ navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-    <!-- Dashboard Tab -->
-    <ion-tab title="HOME" icon-off="ion-ios-pulse" icon-on="ion-home" href="#/tab/dash">
-        <ion-nav-view name="tab-dash"></ion-nav-view>
-    </ion-tab>
-
-
+    
+    <div ng-controller="DashCtrl">
+        <ion-tab title="HOME" icon-off="ion-ios-home" icon-on="ion-home" href="#/tab/dash">
+            <ion-nav-view name="tab-dash"></ion-nav-view>
+        </ion-tab>
+        <ion-tab 
+            ng-controller="TimerCtrl"
+            title="{{runingTimer}}" icon-off="ion-clock" icon-on="ion-clock" href="#/tab/timer">
+            <ion-nav-view name="tab-timer"></ion-nav-view>
+        </ion-tab>
+    </div>
 </ion-tabs>

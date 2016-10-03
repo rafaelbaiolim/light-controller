@@ -1,8 +1,11 @@
 <ion-view view-title="Automated Room - Timer">
-
-    <ion-content class="padding">
+    <ion-content class="padding" on-swipe-right="swipeRight()">
+        <ion-refresher
+            pulling-text="Refresh"
+            on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="content-bg">
-            <div ng-controller="DashCtrl" class="row">
+            <div class="row">
                 <br><br>
                 <div class="row" ng-if="canChangeStatus == true">
                     <div class="center">
@@ -27,16 +30,6 @@
                     <div round-progress max="timeForTimer" current="timer" clockwise="false" color="#3368da" rounded="true" class="text-center"></div>
                 </div>
                 <!-- Here you have the different states that the buttons take during the process -->
-                <!-- Before starting -->
-                <div ng-if="!started && !paused && !done">
-                    <div class="row">
-                        <div class="col">
-                            <button class="button button-outline button-balanced button-rounded button-block" ng-click='selectTimer(10);startTimer()'>
-                                Start
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 <!-- Once it is running -->
                 <div ng-if="started && !done">
                     <div class="row">
@@ -47,29 +40,13 @@
                         </div>
                     </div>
                 </div>
-                <!-- Once it is paused -->
-                <div ng-if="!started && paused && !done">
-                    <div class="row">
-                        <div class="col">
-                            <button class="button button-outline button-balanced button-rounded button-block" ng-click='startTimer()'>
-                                Continue
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="button button-outline button-assertive button-rounded button-block" ng-click='stopTimer()'>
-                                Reset
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div ng-if="done == true">
                 <div class="row">
                     <div class="center bg-color">
-                        <i class="releStatus ion-flash"></i> Alterado Com Sucesso ! <img src="img/cool_lamp.png" height="38" width="38" />
+                        <i class="releStatus ion-flash"> </i> Alterado Com Sucesso ! <img src="img/cool_lamp.png" height="38" width="38" />
                     </div>
                 </div>
-
             </div>
         </div>
     </ion-content>
