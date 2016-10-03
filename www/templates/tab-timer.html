@@ -1,0 +1,76 @@
+<ion-view view-title="Automated Room - Timer">
+
+    <ion-content class="padding">
+        <div class="content-bg">
+            <div ng-controller="DashCtrl" class="row">
+                <br><br>
+                <div class="row" ng-if="canChangeStatus == true">
+                    <div class="center">
+                        <button class="button button-positive" type="button" ng-click="setTime()">
+                            <i class="ion-ios-time-outline"></i> Escolher Hora
+                        </button>
+                    </div>
+                </div>
+                <div class="row" ng-if="canChangeStatus == false" ng-cloak>
+                    <div class="center">
+                        <span class="releStatus">
+                            <i class="ion-information-circled alert"></i> Verifique a conexão com o módulo. 
+                        </span>
+                    </div>
+                </div>
+            </div>           
+            <div ng-if="timer > 0">
+                <div class="progress-wrapper">
+                    <div class="progress">
+                        {{humanizeDurationTimer(timer, 's')}}
+                    </div>
+                    <div round-progress max="timeForTimer" current="timer" clockwise="false" color="#3368da" rounded="true" class="text-center"></div>
+                </div>
+                <!-- Here you have the different states that the buttons take during the process -->
+                <!-- Before starting -->
+                <div ng-if="!started && !paused && !done">
+                    <div class="row">
+                        <div class="col">
+                            <button class="button button-outline button-balanced button-rounded button-block" ng-click='selectTimer(10);startTimer()'>
+                                Start
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Once it is running -->
+                <div ng-if="started && !done">
+                    <div class="row">
+                        <div class="center col-34">
+                            <button class="button button-outline button-assertive button-rounded button-block" ng-click='stopTimer()'>
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Once it is paused -->
+                <div ng-if="!started && paused && !done">
+                    <div class="row">
+                        <div class="col">
+                            <button class="button button-outline button-balanced button-rounded button-block" ng-click='startTimer()'>
+                                Continue
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="button button-outline button-assertive button-rounded button-block" ng-click='stopTimer()'>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="done == true">
+                <div class="row">
+                    <div class="center bg-color">
+                        <i class="releStatus ion-flash"></i> Alterado Com Sucesso ! <img src="img/cool_lamp.png" height="38" width="38" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
