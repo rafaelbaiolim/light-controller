@@ -117,7 +117,7 @@ angular.module('starter.controllers', [])
                             selectedTime.setMonth(d.getMonth());
                             selectedTime.setDate(d.getDate());
 
-                            selectedTime.setHours(selectedTime.getUTCHours() - 1);
+                            selectedTime.setHours(selectedTime.getUTCHours());
                             selectedTime.setMinutes(selectedTime.getUTCMinutes());
                             selectedTime.setSeconds(selectedTime.getUTCSeconds());
 
