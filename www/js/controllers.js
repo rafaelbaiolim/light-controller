@@ -45,6 +45,7 @@ angular.module('starter.controllers', [])
             // functions to control the timer
             // starts the timer
             $scope.startTimer = function () {
+                cordova.plugins.backgroundMode.enable();
                 mytimeout = $timeout($scope.onTimeout, 1000);
                 $scope.started = true;
             };
@@ -60,6 +61,7 @@ angular.module('starter.controllers', [])
                 $rootScope.$broadcast("Timer", {timer: "TIMER"});
                 $timeout.cancel(mytimeout);
                 $scope.runingTimer = "TIMER";
+                cordova.plugins.backgroundMode.disable();
             };
 
             $scope.$watch("runingTimer", function () {
@@ -125,6 +127,8 @@ angular.module('starter.controllers', [])
                             if (parseInt(selectedTime.getHours()) == parseInt(d.getHours()) &&
                                     parseInt(selectedTime.getMinutes()) == parseInt(d.getMinutes())) {
                                 alert("Selecione um Horário Valido");
+                                $scope.runingTimer = "TIMER";
+                                return;
                             }
                             if (parseInt(selectedTime.getHours()) < parseInt(d.getHours()) ||
                                     (parseInt(selectedTime.getHours()) == parseInt(d.getHours()) &&
