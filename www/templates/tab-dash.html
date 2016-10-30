@@ -20,6 +20,10 @@
                             Status do Relé: <br>
                             <span class="center success">{{releStatus}}</span>
                         </span>
+                        <span class="releStatus" ng-if="resetESP == false">
+                            <br> Status da Lâmpada: <br>
+                            <span class="center success">{{lightStatus}}</span>
+                        </span>
                     </span>
 
                     <span class="releStatus" ng-if="cantConnect == true">
@@ -31,7 +35,7 @@
             <div class="row" ng-if="canChangeStatus == true">
                 <div class="center">
                     <button class="button button-positive" type="button" ng-click="changeStatus()">
-                        <i class="ion-flash"></i> Alternar Estado
+                        <i class="ion-flash"></i> {{lightAction}}
                     </button>
                 </div>
 

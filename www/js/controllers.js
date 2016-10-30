@@ -3,14 +3,22 @@ angular.module('starter.controllers', [])
         .controller('TimerCtrl', function ($scope, ionicTimePicker, $rootScope, $state, $timeout, $window) {
             // Timer
             construct();
+            
             $scope.runingTimer = "TIMER";
-
+            $scope.canShowTemp = false;
+            $scope.canShowUmi = false;
+            
             function construct() {
                 var mytimeout = null; // the current timeoutID;
                 $scope.timeSeted = false;
                 $scope.timer = 0;
                 $scope.done = false;
                 $scope.title = "Automated Room - Timer";
+                $scope.lightStatus = "Apagada";
+                $scope.lightAction = "Alternar Estado";
+                $scope.currentTemp = -1;
+                $scope.currentUmi = -1;
+
             }
 
             $scope.swipeRight = function () {
@@ -159,7 +167,11 @@ angular.module('starter.controllers', [])
             $scope.canChangeStatus = false;
             $scope.releStatus = "HIGH";
 
-            var currentStatus = 0;
+            var currentReleStatus = 0;
+            var currentLightStatus = 0;
+            var currentTempApi = 0;
+            var currentUmiApi = 0;
+
             constructor();
             //currentLightState 
             function constructor() {
@@ -182,7 +194,7 @@ angular.module('starter.controllers', [])
 
             $scope.changeStatus = function () {
 
-                if (currentStatus == 0) {
+                if (currentReleStatus == 0) {
                     apiURL += "/H";
                 } else {
                     apiURL += "/L";
@@ -212,11 +224,29 @@ angular.module('starter.controllers', [])
                 }).then(function successCallback(response) {
                     $scope.canChangeStatus = true;
                     $scope.resetESP = false;
-                    currentStatus = response.data[0].currentLightState;
+                    currentReleStatus = response.data[0].currentReleState;
+                    currentLightStatus = response.data[0].currentLightState;
+                    currentTempApi = response.data[0].currentTemp;
+                    currentUmiApi = response.data[0].currentUmi;
                     $scope.releStatus = "HIGH";
-                    if (currentStatus == 0) {
+                    $scope.lightStatus = "Acêsa";
+                    $scope.lightAction = "Apagar Lâmpada";
+                    if (currentTempApi != -1) {
+                        $scope.canShowTemp = true;
+                        $scope.currentTemp = currentTempApi;
+                    }
+                    if (currentUmiApi != -1) {
+                        $scope.canShowUmi = true;
+                        $scope.currentUmi = currentUmiApi;
+                    }
+                    if (currentReleStatus == 0) {
                         $scope.releStatus = "LOW";
                     }
+                    if (currentLightStatus == 0) {
+                        $scope.lightStatus = "Apagada";
+                        $scope.lightAction = "Acender Lâmpada";
+                    }
+
                 }, function errorCallback(response) {
                     $scope.cantConnect = true;
                 });
